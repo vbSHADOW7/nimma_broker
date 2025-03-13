@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nimma Broker - Services</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", Arial, sans-serif;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --primary-color: #2c3e50;
+        --secondary-color: #e74c3c;
+        --card-bg: #f8f9fa;
+        --footer-bg: #2c3e50;
+        --footer-text: #ffffff;
+        --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .dark-mode {
+        --bg-color: #121212;
+        --text-color: #f0f0f0;
+        --primary-color: #3498db;
+        --secondary-color: #e74c3c;
+        --card-bg: #1e1e1e;
+        --footer-bg: #1a1a1a;
+        --footer-text: #f0f0f0;
+        --card-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+      .logo img {
+        width: 80px; /* Adjust as needed */
+        height: auto;
+        display: block;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      header {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+      }
+      .nav-links a:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--secondary-color);
+        transition: width 0.3s;
+      }
+      .nav-links a:hover:after {
+        width: 100%;
+      }
+      .theme-toggle {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+      .hamburger {
+        display: none; /* Hidden on desktop */
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+      /* Mobile Menu Styles */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block; /* Visible on mobile */
+        }
+        .nav-links {
+          display: none; /* Hidden by default on mobile */
+          flex-direction: column;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          background-color: var(--bg-color);
+          padding: 1rem;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links.active {
+          display: flex; /* Shown when active */
+        }
+        .nav-links a {
+          padding: 0.5rem 0;
+          width: 100%;
+          text-align: center;
+        }
+        .nav-links a:after {
+          display: none; /* Remove underline animation on mobile */
+        }
+      }
+      main {
+        margin-top: 70px;
+      }
+      .section-title {
+        text-align: center;
+        margin: 3rem 0;
+        color: var(--primary-color);
+        font-size: 2rem;
+        position: relative;
+      }
+      .section-title:after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 3px;
+        background-color: var(--secondary-color);
+        margin: 10px auto;
+      }
+      .services {
+        padding: 4rem 0;
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      .service-card {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s;
+      }
+      .service-card:hover {
+        transform: translateY(-10px);
+      }
+      .service-icon {
+        font-size: 2.5rem;
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+      }
+      /* Footer Styles */
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--footer-text);
+        padding: 1.5rem 0;
+        text-align: center;
+      }
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 1rem;
+      }
+      .footer-col {
+        flex: 1;
+        min-width: 150px;
+      }
+      .footer-col h4 {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+      }
+      .footer-col ul li {
+        margin-bottom: 0;
+      }
+      .footer-col ul a {
+        color: var(--footer-text);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .footer-col ul a:hover {
+        color: var(--secondary-color);
+      }
+      .copyright {
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.8rem;
+      }
+      @media (max-width: 992px) {
+        .footer-content {
+          flex-direction: column;
+          align-items: center;
+        }
+        .footer-col ul {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <div class="logo">
+          <img src="/static/images/f.png" alt="Nimma Broker Logo" />
+        </div>
+        <button class="hamburger" id="hamburger">☰</button>
+        <div class="nav-links" id="nav-links">
+          <a href="/">Home</a>
+          <a href="/properties">Properties</a>
+          <a href="/services">Services</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="services">
+        <div class="container">
+          <h2 class="section-title">Our Services</h2>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">🏠</div>
+              <h3>Property Listing</h3>
+              <p>List your properties with maximum exposure</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">🔍</div>
+              <h3>Property Search</h3>
+              <p>Find your perfect property easily</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">📊</div>
+              <h3>Market Analysis</h3>
+              <p>Detailed market insights and trends</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">⚖️</div>
+              <h3>Legal Assistance</h3>
+              <p>Expert legal support for transactions</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col">
+            <h4>About Us</h4>
+            <p>Luxury real estate solutions since 2025.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/properties">Properties</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Follow Us</h4>
+            <ul>
+              <li>
+                <a href="https://www.facebook.com" target="_blank"
+                  ><i class="fab fa-facebook"></i> Facebook</a
+                >
+              </li>
+              <li>
+                <a href="https://www.twitter.com" target="_blank"
+                  ><i class="fab fa-twitter"></i> Twitter</a
+                >
+              </li>
+              <li>
+                <a href="https://www.instagram.com/nimmabroker" target="_blank"
+                  ><i class="fab fa-instagram"></i> Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>© 2025 Nimma Broker. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme handling
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+
+      // Load theme from localStorage on page load
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        body.classList.add("dark-mode");
+        themeToggle.textContent = "☀️";
+      } else {
+        body.classList.remove("dark-mode");
+        themeToggle.textContent = "🌙";
+      }
+
+      // Toggle theme and save preference
+      themeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        const isDarkMode = body.classList.contains("dark-mode");
+        themeToggle.textContent = isDarkMode ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+      });
+
+      // Hamburger menu toggle
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        hamburger.textContent = navLinks.classList.contains("active")
+          ? "×"
+          : "☰";
+      });
+    </script>
+  </body>
+</html>
